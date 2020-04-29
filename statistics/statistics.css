@@ -107,7 +107,8 @@ footer .copyright {
   border-right-color: transparent;
 }
 
-td.center, th.center {
+td.center, th.center,
+.module .career-name {
   text-align: center;
 }
 
@@ -132,18 +133,37 @@ section.content .module {
   margin-top: 15px;
 }
 
+.nav-pills li.nav-item {
+  border: none !important;
+}
+
 .nav-pills li.nav-item a {
   color: #343a40;
+  border: 1px solid #ddd;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .nav-pills li.nav-item a:hover {
   color: #343a40;
 }
 
-.nav-pills li.nav-item a.active {
-  background-color: #343a40;
+.nav-pills li.nav-item:hover a.active {
+  background-color: initial;
 }
 
-.nav-pills li.nav-item a.active:hover {
-  color: white;
+.nav-pills li.nav-item a.active {
+  background-color: white;
+  color: #343a40;
+  border-bottom: 0;
+}
+
+.tab-content {
+  border: 1px solid #ddd;
+  margin-bottom: 30px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top: 0px;
 }

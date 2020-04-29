@@ -1,1 +1,52 @@
-hola
+<div class="module">
+
+  <div class="alert alert-secondary career-name" role="alert">
+    Titulación en Grado en....
+  </div>
+
+  <table class="table table-hover overall-average">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col" class="center">Media aritmética</th>
+        <th scope="col" class="center">Media ponderada</th>
+        <th scope="col" class="center">Creditos superados</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr>
+        <th scope="row">Año</th>
+        <td class="center">X</td>
+        <td class="center">X</td>
+        <td class="center">X</td>
+      </tr>
+      <tr class="total">
+        <th scope="row">Total</th>
+        <td class="center">X</td>
+        <td class="center">X</td>
+        <td class="center">X</td>
+      </tr> -->
+    </tbody>
+  </table>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">Historial</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="histogram-tab" data-toggle="tab" href="#histogram" role="tab" aria-controls="histogram" aria-selected="false">Histograma</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
+      <div id="columnchart" style="width: 100%; height: 500px;"></div>
+    </div>
+    <div class="tab-pane fade" id="histogram" role="tabpanel" aria-labelledby="histogram-tab">
+      <div id="histogramchart" style="width: 100%; height: 500px;"></div>
+    </div>
+  </div>
+
+</div>
