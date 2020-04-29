@@ -13,7 +13,9 @@
   "web_accessible_resources": [
     "average.html",
     "statistics/home.html",
-    "icons/*.svg"
+    "statistics/modules/*.html",
+    "icons/*.svg",
+    "resources/*.js"
   ],
 
   "browser_action": {
