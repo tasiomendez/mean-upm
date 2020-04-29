@@ -27,7 +27,9 @@ function listenForClicks() {
       browser.windows.create({
         type: "popup",
         url: '/statistics/statistics.html',
-        titlePreface: "Mostrar estadísticas"
+        titlePreface: "Mostrar estadísticas",
+        width: 1400,
+        height: 900
       }).then((window) => {
         return browser.tabs.sendMessage(tabs[0].id, {
           function: "statistics"
