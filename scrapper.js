@@ -60,7 +60,7 @@
    * Get the title of the table.
    */
   function getTitleFromTable (table) {
-    return table.querySelector("caption").innerText;
+    return table.querySelector("caption").innerText.replace(" académico", "");
   }
 
   /**
@@ -165,6 +165,30 @@
   }
 
   /**
+   * Get the career name of the student;
+   */
+  function getCareerName() {
+    return document.querySelector("textarea").value.split('-')[0].trim();
+  }
+
+  /**
+   * Structure the data of the whole page in an Array.
+   * The first position of the array is the name of the career, and the
+   * remainder objects are each of the tables.
+   */
+  function getStructuredData() {
+    let data = [];
+    data.push(getCareerName());
+    document.querySelectorAll("table#tabla_expediente[data-role=table]").forEach((item) => {
+      data.push({
+        title: getTitleFromTable(item),
+        data: getDataFromTable(item),
+      });
+    });
+    return data;
+  }
+
+  /**
    * Listen for messages from the background script.
    */
   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -172,7 +196,7 @@
       appender();
     else if (message.function === "statistics")
       setTimeout(() => {
-        browser.runtime.sendMessage({ data: getDataFromPage() });
+        browser.runtime.sendMessage({ data: getStructuredData() });
       }, 1000)
   });
 
