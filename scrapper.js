@@ -134,14 +134,21 @@
   }
 
   /**
+   * Get data from the page.
+   */
+  function getDataFromPage () {
+    return Array.from(document.querySelectorAll("table#tabla_expediente[data-role=table]")).reduce((acc, item) => {
+      return acc.concat(getDataFromTable(item));
+    }, []);
+  }
+
+  /**
    * Append a new table to the DOM with the two different averages: the
    * weighted and the arithmetic average.
    */
   function appender () {
-    let data = Array.from(document.querySelectorAll("table#tabla_expediente[data-role=table]")).reduce((acc, item) => {
-      return acc.concat(getDataFromTable(item));
-    }, []);
-    getAverageTable(data).then((table) => {
+    let data = getDataFromPage();
+    return getAverageTable(data).then((table) => {
       let container = document.querySelectorAll("#contenido_seccion")[2];
       let child = container.firstElementChild;
 
@@ -160,11 +167,13 @@
   /**
    * Listen for messages from the background script.
    */
-  browser.runtime.onMessage.addListener((message) => {
-    if (message.function === "calculator")
+  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.function === "mean")
       appender();
-    else if (message.command === "reset")
-      removeExistingBeasts();
+    else if (message.function === "statistics")
+      setTimeout(() => {
+        browser.runtime.sendMessage({ data: getDataFromPage() });
+      }, 1000)
   });
 
 })();

@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "UPM Exam Mean Calculator",
-  "version": "1.0",
+  "version": "1.1",
 
   "description": "Calcula y realiza estadísticas sobre las notas del expediente en la UPM",
 
@@ -12,6 +12,7 @@
 
   "web_accessible_resources": [
     "average.html",
+    "statistics/home.html",
     "icons/*.svg"
   ],
 

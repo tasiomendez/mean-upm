@@ -1,5 +1,5 @@
 html, body {
-  width: 220px;
+  width: 240px;
 }
 
 .choice, .head {
@@ -37,6 +37,15 @@ html, body {
 
 .choice:hover {
   background-color: #e1e1e2;
+}
+
+.choice.disabled {
+  cursor: default !important;
+  opacity: 0.5;
+}
+
+.choice.disabled:hover {
+  background-color: initial !important;
 }
 
 .head span.title {

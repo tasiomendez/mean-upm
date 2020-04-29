@@ -3,15 +3,39 @@
  * the content script in the page.
  */
 function listenForClicks() {
+  // Enable buttons
+  document.querySelectorAll(".choice.disabled").forEach((item) => {
+    item.className = "choice";
+  });
   document.addEventListener("click", (e) => {
     e.target.id = e.target.id || e.target.parentNode.id;
 
+    /**
+     * Compute the mean and show it on the page
+     */
     function calculator(tabs) {
       browser.tabs.sendMessage(tabs[0].id, {
-        function: "calculator"
+        function: "mean"
       });
     }
-    
+
+    /**
+     * Compute statistics and show them on a new page.
+     */
+    function statistics(tabs) {
+      let windowInfo;
+      browser.windows.create({
+        type: "popup",
+        url: '/statistics/statistics.html',
+        titlePreface: "Mostrar estadísticas"
+      }).then((window) => {
+        return browser.tabs.sendMessage(tabs[0].id, {
+          function: "statistics"
+        });
+      }).catch(reportError);
+
+    }
+
     /**
      * Just log the error to the console.
      */
@@ -27,6 +51,10 @@ function listenForClicks() {
     if (e.target.id === "calculator") {
       browser.tabs.query({active: true, currentWindow: true})
         .then(calculator)
+        .catch(reportError);
+    } else if (e.target.id === "statistics") {
+      browser.tabs.query({active: true, currentWindow: true})
+        .then(statistics)
         .catch(reportError);
     }
   });
@@ -47,7 +75,7 @@ function reportExecuteScriptError(error) {
  */
 browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   if(/.*upm\.es\/politecnica\_virtual.*/.test(tabs[0].url))
-    browser.tabs.executeScript({ file: "/background.js" })
+    browser.tabs.executeScript({ file: "/scrapper.js" })
       .then(listenForClicks)
       .catch(reportExecuteScriptError);
 });
