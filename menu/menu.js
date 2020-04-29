@@ -25,11 +25,10 @@ function listenForClicks() {
     function statistics(tabs) {
       let windowInfo;
       browser.windows.create({
-        type: "popup",
-        url: '/statistics/statistics.html',
+        type: "normal",
+        state: "maximized",
+        url: '/statistics/index.html',
         titlePreface: "Mostrar estadísticas",
-        width: 1400,
-        height: 900
       }).then((window) => {
         return browser.tabs.sendMessage(tabs[0].id, {
           function: "statistics"

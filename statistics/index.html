@@ -30,29 +30,33 @@
   <div class="wrapper">
     <!-- Left sidebar -->
     <aside id="basicSidebar" class="pmd-sidebar bg-light pmd-z-depth hidden" role="navigation">
-        <ul class="nav flex-column pmd-sidebar-nav">
+        <ul class="nav flex-column pmd-sidebar-nav" role="tablist" id="menu">
 
             <li class="nav-item">
-                <div class="nav-link" href="#inbox">
+                <div class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">
                     <img src="/icons/dashboard@black.svg" alt="icon" />
                     <span class="media-body">Informe general</span>
                 </div>
             </li>
 
-            <li class="nav-item">
-                <div class="nav-link active" href="#">
+            <!-- <li class="nav-item">
+                <div class="nav-link" id="test-tab" data-toggle="tab" href="#test" role="tab" aria-controls="test" aria-selected="false">
                     <img src="/icons/calendar@black.svg" alt="icon" />
                     <span class="media-body">Title</span>
                 </div>
-            </li>
+            </li> -->
         </ul>
     </aside>
 
     <section class="content">
       <div class="container">
         <div class="row">
-          <div class="col-sm-10 offset-sm-1 module-wrapper hidden">
+          <div class="tab-content main-content" id="menuContent">
+            <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+              <div class="col-sm-10 offset-sm-1 module-wrapper hidden">
 
+              </div>
+            </div>
           </div>
         </div>
       </div>

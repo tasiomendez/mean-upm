@@ -12,7 +12,7 @@
 
   "web_accessible_resources": [
     "average.html",
-    "statistics/home.html",
+    "statistics/index.html",
     "statistics/modules/*.html",
     "icons/*.svg",
     "resources/*.js"
