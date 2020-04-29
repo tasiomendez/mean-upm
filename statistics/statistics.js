@@ -102,8 +102,8 @@
 
     // Y axis: scale and draw:
     let y = d3.scaleLinear()
+        .domain([0, 10])
         .range([height, 0]);
-        y.domain([0, d3.max(data, function(d) { return d.arithmetic; })]);
     svg.append("g")
         .call(d3.axisLeft(y));
 
@@ -134,6 +134,11 @@
         .attr("width", xSubgroup.bandwidth())
         .attr("height", function(d) { return height - y(d.value); })
         .attr("fill", function(d) { return color(d.key); });
+
+    // Separate X axis text
+    document.querySelectorAll("svg text").forEach((item) => {
+      item.setAttribute('dy', '1.5em');
+    });
 
   }
 
@@ -252,6 +257,10 @@
   }
 
   browser.runtime.onMessage.addListener((message) => {
+    document.querySelectorAll(".hidden").forEach((item) => {
+      item.style.display = "block";
+    });
+    document.querySelector(".spinner-wrapper").className += " hidden";
     getOverallTemplate(message.data);
   });
 

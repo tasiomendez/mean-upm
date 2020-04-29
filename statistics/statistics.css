@@ -4,8 +4,8 @@ html, body {
   height: 100%;
 }
 
-.hidden {
-  display: none !important;
+.hidden, div.hidden {
+  display: none;
 }
 
 body {
@@ -131,6 +131,10 @@ tbody tr.total td {
 
 section.content .module {
   margin-top: 15px;
+}
+
+.nav-pills {
+  margin-top: 30px !important;
 }
 
 .nav-pills li.nav-item {
