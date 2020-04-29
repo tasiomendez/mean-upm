@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mostrar estadísticas</title>
+    <link rel="stylesheet" href="statistics.css"/>
+    <link rel="stylesheet" href="progress.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  </head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="file:///C:/Users/Tasio/Downloads/tmp_apuntes/upm-mean/icons/icon@white.svg" alt="icon" /> UPM Exam Mean Calculator - Estadísticas
+      </a>
+    </div>
+  </nav>
+
+  <div class="spinner-wrapper hidden">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <!-- Left sidebar -->
+    <aside id="basicSidebar" class="pmd-sidebar bg-light pmd-z-depth" role="navigation">
+        <ul class="nav flex-column pmd-sidebar-nav">
+
+            <li class="nav-item">
+                <div class="nav-link" href="#inbox">
+                    <img src="file:///C:/Users/Tasio/Downloads/tmp_apuntes/upm-mean/icons/dashboard@black.svg" alt="icon" />
+                    <span class="media-body">Informe general</span>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <div class="nav-link active" href="#">
+                    <img src="file:///C:/Users/Tasio/Downloads/tmp_apuntes/upm-mean/icons/calendar@black.svg" alt="icon" />
+                    <span class="media-body">Title</span>
+                </div>
+            </li>
+        </ul>
+    </aside>
+
+    <section class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-10 offset-sm-1">
+
+            <div class="module">
+
+              <div class="alert alert-secondary" role="alert">
+                Titulación en Grado en....
+              </div>
+
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col" class="center">Media aritmética</th>
+                    <th scope="col" class="center">Media ponderada</th>
+                    <th scope="col" class="center">Creditos superados</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">2014 - 2015</th>
+                    <td class="center">7.6432</td>
+                    <td class="center">8.7000</td>
+                    <td class="center">60.0</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2014 - 2015</th>
+                    <td class="center">7.6432</td>
+                    <td class="center">8.7000</td>
+                    <td class="center">60.0</td>
+                  </tr>
+                  <tr class="total">
+                    <th scope="row">Total</th>
+                    <td class="center">7.6432</td>
+                    <td class="center">8.7000</td>
+                    <td class="center">60.0</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Nav tabs -->
+              <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                  <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">Historial</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="histogram-tab" data-toggle="tab" href="#histogram" role="tab" aria-controls="histogram" aria-selected="false">Histograma</a>
+                </li>
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
+                  <div id="columnchart" style="width: 100%; height: 500px;"></div>
+                </div>
+                <div class="tab-pane fade" id="histogram" role="tabpanel" aria-labelledby="histogram-tab">
+                  <div id="histogramchart" style="width: 100%; height: 500px;"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <span class="copyright">&copy; 2020 Exam Mean Calculator</span>
+        </div>
+      </footer>
+
+    </section>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Dinosaur', 'Length'],
+        ['Acrocanthosaurus (top-spined lizard)', 12.2],
+        ['Albertosaurus (Alberta lizard)', 9.1],
+        ['Allosaurus (other lizard)', 12.2],
+        ['Apatosaurus (deceptive lizard)', 22.9],
+        ['Archaeopteryx (ancient wing)', 0.9],
+        ['Argentinosaurus (Argentina lizard)', 36.6],
+        ['Baryonyx (heavy claws)', 9.1],
+        ['Brachiosaurus (arm lizard)', 30.5],
+        ['Ceratosaurus (horned lizard)', 6.1],
+        ['Coelophysis (hollow form)', 2.7],
+        ['Compsognathus (elegant jaw)', 0.9],
+        ['Deinonychus (terrible claw)', 2.7],
+        ['Diplodocus (double beam)', 27.1],
+        ['Dromicelomimus (emu mimic)', 3.4],
+        ['Gallimimus (fowl mimic)', 5.5],
+        ['Mamenchisaurus (Mamenchi lizard)', 21.0],
+        ['Megalosaurus (big lizard)', 7.9],
+        ['Microvenator (small hunter)', 1.2],
+        ['Ornithomimus (bird mimic)', 4.6],
+        ['Oviraptor (egg robber)', 1.5],
+        ['Plateosaurus (flat lizard)', 7.9],
+        ['Sauronithoides (narrow-clawed lizard)', 2.0],
+        ['Seismosaurus (tremor lizard)', 45.7],
+        ['Spinosaurus (spiny lizard)', 12.2],
+        ['Supersaurus (super lizard)', 30.5],
+        ['Tyrannosaurus (tyrant lizard)', 15.2],
+        ['Ultrasaurus (ultra lizard)', 30.5],
+        ['Velociraptor (swift robber)', 1.8]]);
+
+      var options = {
+        title: 'Lengths of dinosaurs, in meters',
+        legend: { position: 'none' },
+      };
+
+      var chart = new google.visualization.Histogram(document.getElementById('histogramchart'));
+      chart.draw(data, options);
+    }
+  </script>
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChartColumn);
+
+      function drawChartColumn() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses', 'Profit'],
+          ['2014', 1000, 400, 200],
+          ['2015', 1170, 460, 250],
+          ['2016', 660, 1120, 300],
+          ['2017', 1030, 540, 350]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          }
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
+    <script>
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      google.charts.setOnLoadCallback(drawChart);
+    });
+    </script>
+
+  <script src="statistics.js"></script>
+</body>
+
+</html>
