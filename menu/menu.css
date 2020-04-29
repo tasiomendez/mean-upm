@@ -1,5 +1,5 @@
 html, body {
-  width: 200px;
+  width: 220px;
 }
 
 .choice, .head {
@@ -7,10 +7,26 @@ html, body {
   padding: 4px 10px;
   margin-bottom: 4px;
   text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .choice {
   cursor: pointer;
+}
+
+.choice span.left {
+  padding-left: 4px;
+}
+
+.choice span.right {
+  width: 100%;
+}
+
+.head div {
+  padding-left: 8px;
 }
 
 .separator {
