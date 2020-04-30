@@ -20,8 +20,4 @@ Virtual de la Universidad Politécnica de Madrid.
 
 Los cálculos son realizados al momento, por lo que los datos utilizados para ello
 no son almacenados ni guardados. Única y exclusivamente, los datos son procesados
-en local para los calculos correspondientes, en ningún momento son guardados o
-utilizados con otro fin.
-
-El estilo de la página sigue las normas de Material Design y los iconos han sido
-extraídos de la [página oficial](https://material.io/resources/icons/?style=baseline).
+en local para los calculos correspondientes, en ningún momento son utilizados con otro fin.
