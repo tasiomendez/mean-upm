@@ -119,9 +119,7 @@ document.addEventListener("click", (e) => {
     browser.tabs.create({ url: "https://www.upm.es/webmail_alumnos/" });
   } else if (e.target.id === "polivirtual") {
     browser.tabs.create({ url: "https://www.upm.es/politecnica_virtual/" });
-  } else if (e.target.id === "help") {
-    browser.tabs.create({ url: "https://addons.mozilla.org/es/firefox/addon/calculadora-nota-media-upm/" });
-  }
+  } 
 });
 
 // Hide error message

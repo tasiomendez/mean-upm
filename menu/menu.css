@@ -39,12 +39,12 @@ html, body {
   background-color: #e1e1e2;
 }
 
-.choice.disabled {
+.choice.disabled, #help {
   cursor: default !important;
   opacity: 0.5;
 }
 
-.choice.disabled:hover {
+.choice.disabled:hover, #help:hover {
   background-color: initial !important;
 }
 
