@@ -2,11 +2,8 @@
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
  */
-function listenForClicks() {
-  // Enable buttons
-  document.querySelectorAll(".choice.disabled").forEach((item) => {
-    item.className = "choice";
-  });
+function listenForClicks (enabled) {
+
   document.addEventListener("click", (e) => {
     e.target.id = e.target.id || e.target.parentNode.id;
 
@@ -49,23 +46,46 @@ function listenForClicks() {
      * Get the active tab,
      * then call the appropriate function.
      */
-    if (e.target.id === "calculator") {
-      browser.tabs.query({active: true, currentWindow: true})
+    if (e.target.id === "calculator" && enabled) {
+      browser.tabs.query({ active: true, currentWindow: true })
         .then(calculator)
         .catch(reportError);
-    } else if (e.target.id === "statistics") {
-      browser.tabs.query({active: true, currentWindow: true})
+    } else if (e.target.id === "statistics" && enabled) {
+      browser.tabs.query({ active: true, currentWindow: true })
         .then(statistics)
         .catch(reportError);
     }
   });
+
 };
+
+/**
+ * Check if the user is in the right location.
+ */
+function checkLocation () {
+  return browser.tabs.query({ active: true, currentWindow: true })
+    .then((tabs) => {
+      return browser.tabs.sendMessage(tabs[0].id, {
+        function: "check"
+      });
+    }).then((response) => {
+      if (!response.check)
+        throw new Error("NotRightLocation");
+      else return response;
+    }).catch((error) => {
+      document.querySelector(".error .alert").innerText =
+        "Dirijase a 'Mis Datos' > 'Estudios' > 'Expediente' para calcular " +
+        "la media y las estadísticas. Por último seleccione como desea ver " +
+        "el expediente";
+      document.querySelector(".error").style.display = "block";
+    });
+}
 
 /**
  * There was an error executing the script.
  * Display the popup's error message, and hide the normal UI.
  */
-function reportExecuteScriptError(error) {
+function reportExecuteScriptError (error) {
   console.error(`Failed to execute content script: ${error.message}`);
 }
 
@@ -75,10 +95,19 @@ function reportExecuteScriptError(error) {
  * If we couldn't inject the script, handle the error.
  */
 browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-  if(/.*upm\.es\/politecnica\_virtual.*/.test(tabs[0].url))
+  if(/.*upm\.es\/politecnica\_virtual.*/.test(tabs[0].url)) {
+
+    // Enable buttons
+    document.querySelectorAll(".choice.disabled").forEach((item) => {
+      item.className = "choice";
+    });
+
     browser.tabs.executeScript({ file: "/scrapper.js" })
+      .then(checkLocation)
       .then(listenForClicks)
       .catch(reportExecuteScriptError);
+
+  }
 });
 
 /**
@@ -92,3 +121,6 @@ document.addEventListener("click", (e) => {
     browser.tabs.create({ url: "https://www.upm.es/politecnica_virtual/" });
   }
 });
+
+// Hide error message
+document.querySelector(".error").style.display = "none";

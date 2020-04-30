@@ -192,7 +192,12 @@
    * Listen for messages from the background script.
    */
   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.function === "mean")
+    let check = Array.from(document.querySelectorAll("li.activo")).reduce((acc, item) => {
+      return acc || item.innerText.includes("Expediente");
+    }, false);
+    if (message.function === "check")
+      sendResponse({ check: check })
+    else if (message.function === "mean")
       appender();
     else if (message.function === "statistics")
       setTimeout(() => {
