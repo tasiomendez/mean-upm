@@ -4,7 +4,7 @@ html, body {
   height: 100%;
 }
 
-.hidden, div.hidden {
+.hidden, div.hidden, div.hidden-spinner {
   display: none;
 }
 
@@ -30,12 +30,15 @@ body {
 
 nav.navbar div.container {
   justify-content: center;
-  margin-left: 220px;
 }
 
 .navbar img {
   height: 45px;
   margin-right: 8px;
+}
+
+li.nav-item div.active {
+  background-color: #e2e3e5;
 }
 
 .nav-item {
@@ -170,4 +173,9 @@ section.content .module {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   border-top: 0px;
+}
+
+.main-content {
+  width: 100%;
+  border: none;
 }
