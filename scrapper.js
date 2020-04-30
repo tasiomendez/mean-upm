@@ -168,7 +168,8 @@
    * Get the career name of the student;
    */
   function getCareerName() {
-    return document.querySelector("textarea").value.split('-')[0].trim();
+    if (document.querySelector("textarea"))
+      return document.querySelector("textarea").value.split('-')[0].trim();
   }
 
   /**
@@ -178,14 +179,15 @@
    */
   function getStructuredData() {
     let data = [];
-    data.push(getCareerName());
+    data.push((getCareerName()) ? getCareerName() : "");
     document.querySelectorAll("table#tabla_expediente[data-role=table]").forEach((item) => {
       data.push({
         title: getTitleFromTable(item),
         data: getDataFromTable(item),
       });
     });
-    return data;
+    if (data.length > 1)
+      return data;
   }
 
   /**
@@ -197,7 +199,7 @@
     }, false);
     if (message.function === "check")
       sendResponse({ check: check })
-    else if (message.function === "mean")
+    else if (message.function === "mean" && getStructuredData())
       appender();
     else if (message.function === "statistics")
       setTimeout(() => {

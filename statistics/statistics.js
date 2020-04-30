@@ -220,6 +220,7 @@
    * the data which is shown.
    */
   browser.runtime.onMessage.addListener((message) => {
+    if (!message.data) return;
     let career = message.data.shift();
     document.querySelectorAll(".hidden").forEach((item) => {
       item.style.display = "block";
