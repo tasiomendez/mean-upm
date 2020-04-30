@@ -1,4 +1,4 @@
-# Calculadora Nota Media
+# Calculadora Nota Media @ Mozilla Firefox
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/tasiomendez/mean-upm-firefox?label=latest%20version)](https://github.com/tasiomendez/mean-upm-firefox/releases)
 [![GitHub Release Date](https://img.shields.io/github/release-date/tasiomendez/mean-upm-firefox)](https://github.com/tasiomendez/mean-upm-firefox/releases)
