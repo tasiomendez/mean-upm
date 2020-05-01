@@ -18,3 +18,11 @@ Los cálculos son realizados al momento, por lo que los datos utilizados para el
 no son almacenados ni guardados. Los datos son procesados unica y exclusivamente
 en el propio navegador para los calculos correspondientes, en ningún momento son
 utilizados con ningún otro fin.
+
+## Instalación
+
+[![Firefox Installation](https://img.shields.io/badge/instalar-firefox-orange)](https://github.com/tasiomendez/mean-upm/releases/latest/download/mean-upm-firefox-fx.xpi)
+
+Para **Firefox** se debe [instalar](https://github.com/tasiomendez/mean-upm/releases/latest/download/mean-upm-firefox-fx.xpi) el archivo `.xpi` disponible desde la página de [releases](https://github.com/tasiomendez/mean-upm/releases/latest). Se encuentran disponibles diferentes versiones, pero siempre es **recomendable** instalar la última versión. 
+
+Para **Chrome**, se puede encontrar la extensión disponible en Chrome Web Store.
