@@ -25,17 +25,19 @@ function drawHistogram (element, _data, _width) {
 
   // X axis: scale and draw:
   let x = d3.scaleLinear()
-      .domain([5, 10])
+      .domain([4.5, 10.5])
       .range([0, width]);
+  let x_labels = ["", "< 5.5", "", "[ 5.5, 6.5 )", "", "[ 6.5, 7.5 )", "",
+                  "[ 7.5, 8.5 )", "", "[ 8.5, 9.5 )", "", "≥ 9.5"]
   svg.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).tickPadding(10));
+      .call(d3.axisBottom(x).tickPadding(10).tickFormat((d, i) => x_labels[i]));
 
   // set the parameters for the histogram
   let histogram = d3.histogram()
       .value(function(d) { return d.grade; })   // I need to give the vector of value
       .domain(x.domain())  // then the domain of the graphic
-      .thresholds(x.ticks(10)); // then the numbers of bins
+      .thresholds([4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5]); // then the numbers of bins
 
   // And apply this function to data to get the bins
   let bins = histogram(data);
