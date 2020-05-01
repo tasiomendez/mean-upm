@@ -35,13 +35,8 @@ class Browser {
    */
   executeScript (options) {
     return new Promise( (resolve, reject) => {
-      try {
-        this.browser.tabs.executeScript(options, () => {
-          resolve();
-        });
-      } catch (error) {
-        reject(error)
-      };
+      if (this.type === "Firefox") this.browser.tabs.executeScript(options).then(resolve).catch(reject);
+      else this.browser.tabs.executeScript(options, resolve);
     });
   }
 
@@ -49,7 +44,7 @@ class Browser {
    * Create a new tab.
    * Example:
    *  {
-   *    url:"https://example.org"
+   *    url: "https://example.org"
    *  }
    */
   createTab (options) {
@@ -60,7 +55,7 @@ class Browser {
         });
       } catch (error) {
         reject(error)
-      };
+      }
     });
   }
 
@@ -90,13 +85,8 @@ class Browser {
    */
   sendMessage (tab, message) {
     return new Promise( (resolve, reject) => {
-      try {
-        this.browser.tabs.sendMessage(tab, message, (response) => {
-          resolve(response);
-        });
-      } catch (error) {
-        reject(error);
-      }
+      if (this.type === "Firefox") this.browser.tabs.sendMessage(tab.id, message).then(resolve).catch(reject);
+      else this.browser.tabs.sendMessage(tab.id, message, resolve);
     });
   }
 

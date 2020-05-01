@@ -1,4 +1,17 @@
-(function() {
+/**
+ * PV Scraper
+ *
+ * Scrapper of the PV website to get the information of the different
+ * tables of the transcript of records.
+ *
+ * Author: Tasio Méndez (tasiomendez)
+ * URL: https://github.com/tasiomendez/
+ * Version: 1.0
+ */
+;(function(undefined) {
+
+  // Get the browser object
+  const _browser = (typeof browser !== 'undefined') ? browser : chrome;
 
   const RECOGNITION = "R. Cred."
 
@@ -67,13 +80,14 @@
    * Get HTML template from the extension stored in path.
    */
   function getTemplate (path) {
-    return fetch(browser.extension.getURL(path))
+    return fetch(_browser.extension.getURL(path))
         .then(response => response.text())
         .then(data => {
-          let div = document.createElement("div");
-          div.innerHTML = data;
-          return div;
-        }).catch(error => {
+          let $div = document.createElement("div");
+          $div.innerHTML = data;
+          return $div;
+        })
+        .catch(error => {
           console.error(error);
         });
   }
@@ -82,14 +96,15 @@
    * Builds the average table and is filled with the corresponding data.
    */
   function getAverageTable (data) {
-    return getTemplate('/average.html')
+    return getTemplate('/html/template.average.html')
       .then((response) => {
         response.querySelector("table#average td#weighted").innerText = getWeightedAverage(data);
         response.querySelector("table#average td#arithmetic").innerText = getArithmeticAverage(data);
         response.querySelector("table#average td#credits").innerText = getPassedCredits(data);
         return response;
-      }).catch((error) => {
-        console.log(error);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -193,17 +208,21 @@
   /**
    * Listen for messages from the background script.
    */
-  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  _browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+
     let check = Array.from(document.querySelectorAll("li.activo")).reduce((acc, item) => {
       return acc || item.innerText.includes("Expediente");
     }, false);
+
     if (message.function === "check")
       sendResponse({ check: check })
+
     else if (message.function === "mean" && getStructuredData())
       appender();
+
     else if (message.function === "statistics")
       setTimeout(() => {
-        browser.runtime.sendMessage({ data: getStructuredData() });
+        _browser.runtime.sendMessage({ data: getStructuredData() });
       }, 1000)
   });
 

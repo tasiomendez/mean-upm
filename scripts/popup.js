@@ -26,7 +26,7 @@ function listenForClicks (enabled) {
 
     _browser.getCurrentTab()
       .then((tab) => {
-        if (!enable) throw new ValidationError("ActionNotAllowed");
+        if (!enabled) throw new ValidationError("ActionNotAllowed");
         else return tab;
       })
       .then((tab) => {
@@ -45,7 +45,7 @@ function listenForClicks (enabled) {
  * Compute the mean and show it on the page
  */
 function calculator(tab) {
-  return _browser.sendMessage(tab.id, { function: "mean" });
+  return _browser.sendMessage(tab, { function: "mean" });
 }
 
 /**
@@ -59,7 +59,7 @@ function statistics(tab) {
     url: '/statistics/index.html',
   })
   .then((window) => {
-    return _browser.sendMessage(tab.id, { function: "statistics" });
+    return _browser.sendMessage(tab, { function: "statistics" });
   })
   .catch(reportError);
 }
@@ -70,7 +70,7 @@ function statistics(tab) {
 function checkLocation () {
   return _browser.getCurrentTab()
     .then((tab) => {
-      return _browser.sendMessage(tab.id, { function: "check" });
+      return _browser.sendMessage(tab, { function: "check" });
     })
     .then((response) => {
       if (!response.check)
@@ -91,7 +91,7 @@ function checkLocation () {
  */
 function checkURL (tab) {
   if(/.*upm\.es\/politecnica\_virtual.*/.test(tab.url))
-    return tab.url;
+    return tab;
   else throw new ValidationError("WrongURL");
 }
 
@@ -119,7 +119,7 @@ _browser.getCurrentTab()
     });
   })
   .then(() => {
-    return _browser.executeScript({ file: "/scripts/scrapper.js" });
+    return _browser.executeScript({ file: "/scripts/scraper.js" });
   })
   .then(checkLocation)
   .then(listenForClicks)
@@ -139,3 +139,7 @@ document.addEventListener("click", (e) => {
 
 // Hide error message
 document.querySelector(".error").style.display = "none";
+
+// Fix CSS style in Chrome
+if (_browser.type === "Chrome")
+  document.querySelector(".error .alert").style.marginRight = "18px";
