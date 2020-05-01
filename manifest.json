@@ -13,9 +13,7 @@
   "web_accessible_resources": [
     "html/template.*",
     "icons/*.svg",
-    "scripts/*.js",
-    "statistics/index.html",
-    "statistics/modules/*.html"
+    "scripts/*.js"
   ],
 
   "browser_action": {
