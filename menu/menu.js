@@ -1,78 +1,83 @@
+// Get the current browser and its corresponding functions
+// independently of which one is it (Firefox, Chrome)
+let _browser = new Browser();
+
+/**
+ * ValidationError class
+ * Error thrown when te user is not in the right location to
+ * use the addon.
+ */
+class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
+
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
+ * Get the current tab and executes the corresponding function.
  */
 function listenForClicks (enabled) {
 
   document.addEventListener("click", (e) => {
     e.target.id = e.target.id || e.target.parentNode.id;
 
-    /**
-     * Compute the mean and show it on the page
-     */
-    function calculator(tabs) {
-      browser.tabs.sendMessage(tabs[0].id, {
-        function: "mean"
-      });
-    }
-
-    /**
-     * Compute statistics and show them on a new page.
-     */
-    function statistics(tabs) {
-      let windowInfo;
-      browser.windows.create({
-        type: "normal",
-        state: "maximized",
-        url: '/statistics/index.html',
-        titlePreface: "Mostrar estadísticas",
-      }).then((window) => {
-        return browser.tabs.sendMessage(tabs[0].id, {
-          function: "statistics"
-        });
-      }).catch(reportError);
-
-    }
-
-    /**
-     * Just log the error to the console.
-     */
-    function reportError(error) {
-      console.error(error);
-      console.error(`An error ocurred: ${error}`);
-    }
-
-    /**
-     * Get the active tab,
-     * then call the appropriate function.
-     */
-    if (e.target.id === "calculator" && enabled) {
-      browser.tabs.query({ active: true, currentWindow: true })
-        .then(calculator)
-        .catch(reportError);
-    } else if (e.target.id === "statistics" && enabled) {
-      browser.tabs.query({ active: true, currentWindow: true })
-        .then(statistics)
-        .catch(reportError);
-    }
+    _browser.getCurrentTab()
+      .then((tab) => {
+        if (!enable) throw new ValidationError("ActionNotAllowed");
+        else return tab;
+      })
+      .then((tab) => {
+        if (e.target.id === "calculator")
+          return calculator(tab);
+        else if (e.target.id === "statistics")
+          return statistics(tab);
+        else throw new ValidationError("ButtonNotDefined");
+      })
+      .catch(onError);
   });
 
 };
 
 /**
+ * Compute the mean and show it on the page
+ */
+function calculator(tab) {
+  return _browser.sendMessage(tab.id, { function: "mean" });
+}
+
+/**
+ * Compute statistics and show them on a new page.
+ */
+function statistics(tab) {
+  let windowInfo;
+  return _browser.createWindow({
+    type: "normal",
+    state: "maximized",
+    url: '/statistics/index.html',
+  })
+  .then((window) => {
+    return _browser.sendMessage(tab.id, { function: "statistics" });
+  })
+  .catch(reportError);
+}
+
+/**
  * Check if the user is in the right location.
  */
 function checkLocation () {
-  return browser.tabs.query({ active: true, currentWindow: true })
-    .then((tabs) => {
-      return browser.tabs.sendMessage(tabs[0].id, {
-        function: "check"
-      });
-    }).then((response) => {
+  return _browser.getCurrentTab()
+    .then((tab) => {
+      return _browser.sendMessage(tab.id, { function: "check" });
+    })
+    .then((response) => {
       if (!response.check)
-        throw new Error("NotRightLocation");
-      else return response;
-    }).catch((error) => {
+        throw new ValidationError("NotRightLocation");
+      else return true;
+    })
+    .catch((error) => {
       document.querySelector(".error .alert").innerText =
         "Dirijase a 'Mis Datos' > 'Estudios' > 'Expediente' para calcular " +
         "la media y las estadísticas. Por último seleccione como desea ver " +
@@ -82,11 +87,22 @@ function checkLocation () {
 }
 
 /**
- * There was an error executing the script.
- * Display the popup's error message, and hide the normal UI.
+ * Check if the user is in the right web page.
  */
-function reportExecuteScriptError (error) {
-  console.error(`Failed to execute content script: ${error.message}`);
+function checkURL (tab) {
+  if(/.*upm\.es\/politecnica\_virtual.*/.test(tab.url))
+    return tab.url;
+  else throw new ValidationError("WrongURL");
+}
+
+/**
+ * There was an error executing the addon.
+ * Display the error message on console.
+ */
+function onError (error) {
+  if (error instanceof ValidationError)
+    console.debug(`Failed to execute addon: ${error.message}`);
+  else console.error(`Failed to execute addon: ${error.message}`);
 }
 
 /**
@@ -94,21 +110,20 @@ function reportExecuteScriptError (error) {
  * and add a click handler.
  * If we couldn't inject the script, handle the error.
  */
-browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-  if(/.*upm\.es\/politecnica\_virtual.*/.test(tabs[0].url)) {
-
+_browser.getCurrentTab()
+  .then(checkURL)
+  .then(() => {
     // Enable buttons
     document.querySelectorAll(".choice.disabled").forEach((item) => {
       item.className = "choice";
     });
-
-    browser.tabs.executeScript({ file: "/scrapper.js" })
-      .then(checkLocation)
-      .then(listenForClicks)
-      .catch(reportExecuteScriptError);
-
-  }
-});
+  })
+  .then(() => {
+    return _browser.executeScript({ file: "/scrapper.js" });
+  })
+  .then(checkLocation)
+  .then(listenForClicks)
+  .catch(onError);
 
 /**
  * Call the appropriate function when clicking on button.
@@ -116,10 +131,10 @@ browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 document.addEventListener("click", (e) => {
   e.target.id = e.target.id || e.target.parentNode.id;
   if (e.target.id === "webmail") {
-    browser.tabs.create({ url: "https://www.upm.es/webmail_alumnos/" });
+    _browser.createTab({ url: "https://www.upm.es/webmail_alumnos/" });
   } else if (e.target.id === "polivirtual") {
-    browser.tabs.create({ url: "https://www.upm.es/politecnica_virtual/" });
-  } 
+    _browser.createTab({ url: "https://www.upm.es/politecnica_virtual/" });
+  }
 });
 
 // Hide error message
