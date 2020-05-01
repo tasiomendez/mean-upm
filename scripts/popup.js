@@ -119,7 +119,7 @@ _browser.getCurrentTab()
     });
   })
   .then(() => {
-    return _browser.executeScript({ file: "/scrapper.js" });
+    return _browser.executeScript({ file: "/scripts/scrapper.js" });
   })
   .then(checkLocation)
   .then(listenForClicks)
