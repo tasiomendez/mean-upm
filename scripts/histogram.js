@@ -59,4 +59,15 @@ function drawHistogram (element, _data, _width) {
         .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
         .attr("height", function(d) { return height - y(d.length); })
         .style("fill", "#69b3a2");
+
+  // Add labels to columns
+  svg.selectAll(".text")
+      .data(bins)
+      .enter()
+      .append("text")
+        .attr("class", "bar")
+        .attr("text-anchor", "middle")
+        .attr("x", function(d) { return x(d.x0) + ( x(d.x1) - x(d.x0) ) * 0.5 })
+        .attr("transform", function(d) { return "translate(" + 1 + "," + Number(y(d.length) + 20) + ")"; })
+        .text(function(d) { return (d.length > 0) ? String(d.length) : ""; });
 }

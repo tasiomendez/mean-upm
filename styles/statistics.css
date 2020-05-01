@@ -179,3 +179,10 @@ section.content .module {
   width: 100%;
   border: none;
 }
+
+svg text.bar {
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+  fill: white;
+}
