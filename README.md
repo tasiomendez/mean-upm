@@ -1,8 +1,8 @@
-# Calculadora Nota Media @ Mozilla Firefox
+# Browser addon
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/tasiomendez/mean-upm-firefox?label=latest%20version)](https://github.com/tasiomendez/mean-upm-firefox/releases)
-[![GitHub Release Date](https://img.shields.io/github/release-date/tasiomendez/mean-upm-firefox)](https://github.com/tasiomendez/mean-upm-firefox/releases)
-[![GitHub](https://img.shields.io/github/license/tasiomendez/mean-upm-firefox)](https://github.com/tasiomendez/mean-upm-firefox)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/tasiomendez/mean-upm?label=latest%20version)](https://github.com/tasiomendez/mean-upm/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/tasiomendez/mean-upm)](https://github.com/tasiomendez/mean-upm/releases)
+[![GitHub](https://img.shields.io/github/license/tasiomendez/mean-upm)](https://github.com/tasiomendez/mean-upm)
 
 Esta extensión permite calcular de una forma sencilla y rápida la nota media
 a partir de la información mostrada en el Expediente en la página de Politécnica
@@ -16,5 +16,5 @@ Virtual de la Universidad Politécnica de Madrid.
 
 Los cálculos son realizados al momento, por lo que los datos utilizados para ello
 no son almacenados ni guardados. Los datos son procesados unica y exclusivamente
-en el propio navegador para los calculos correspondientes, en ningún momento son 
+en el propio navegador para los calculos correspondientes, en ningún momento son
 utilizados con ningún otro fin.
