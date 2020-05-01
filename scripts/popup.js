@@ -56,12 +56,12 @@ function statistics(tab) {
   return _browser.createWindow({
     type: "normal",
     state: "maximized",
-    url: '/statistics/index.html',
+    url: '/html/statistics.index.html',
   })
   .then((window) => {
     return _browser.sendMessage(tab, { function: "statistics" });
   })
-  .catch(reportError);
+  .catch(onError);
 }
 
 /**

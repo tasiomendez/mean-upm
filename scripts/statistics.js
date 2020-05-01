@@ -1,4 +1,17 @@
-(function() {
+/**
+ * Statistics Webpage Builder
+ *
+ * Creates a review page with different statistics which have been
+ * obtained from the transcript of records.
+ *
+ * Author: Tasio Méndez (tasiomendez)
+ * URL: https://github.com/tasiomendez/
+ * Version: 1.0
+ */
+;(function(undefined) {
+
+  // Get the browser object
+  const _browser = (typeof browser !== 'undefined') ? browser : chrome;
 
   /**
    * Extract from the data the weighted mean.
@@ -43,12 +56,12 @@
    * Get HTML template from the extension stored in path.
    */
   function getTemplate (path) {
-    return fetch(browser.extension.getURL(path))
+    return fetch(_browser.extension.getURL(path))
         .then(response => response.text())
         .then(data => {
-          let div = document.createElement("div");
-          div.innerHTML = data;
-          return div;
+          let $div = document.createElement("div");
+          $div.innerHTML = data;
+          return $div;
         }).catch(error => {
           console.error(error);
         });
@@ -93,7 +106,7 @@
     let total = Array.from(data).reduce((acc, item) => {
       return acc.concat(item.data);
     }, []);
-    return getTemplate('/statistics/modules/overall.html')
+    return getTemplate('/html/template.overall.html')
         .then((template) => {
           template.querySelector(".career-name").innerText = "Titulación en " + career;
           let table = template.querySelector(".overall-average");
@@ -193,7 +206,7 @@
       let $li = buildNewMenuItem(data[i].title, i);
       menu.appendChild($li);
 
-      getTemplate('/statistics/modules/year.html')
+      getTemplate('/html/template.year.html')
           .then((template) => {
             template.querySelector(".career-name").innerText = "Titulación en " + career;
 
@@ -219,7 +232,7 @@
    * Add a listener to receive messages. The message receive contains
    * the data which is shown.
    */
-  browser.runtime.onMessage.addListener((message) => {
+  _browser.runtime.onMessage.addListener((message) => {
     if (!message.data) return;
     let career = message.data.shift();
     document.querySelectorAll(".hidden").forEach((item) => {
