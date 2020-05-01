@@ -13,6 +13,7 @@ class Browser {
 
   constructor() {
     this.browser = (typeof browser !== 'undefined') ? browser : chrome;
+    this.type = (typeof browser !== 'undefined') ? "Firefox" : "Chrome";
   }
 
   /**
