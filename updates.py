@@ -49,7 +49,7 @@ def makezip(version):
     for folder in folders:
         for root, subfolder, filenames in os.walk(folder):
             for filename in filenames:
-                logger.info('Writing {} into zip'.format(os.path.join(root, filename)))
+                logger.info('Writing into zip {}'.format(os.path.join(root, filename)))
                 object.write(os.path.join(root, filename))
     for filename in files:
         logger.info('Writing {} into zip'.format(filename))
