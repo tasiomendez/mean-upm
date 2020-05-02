@@ -16,14 +16,14 @@ def commit(repo, version):
     Commit changes in the repo given.
     """
     repo.git.add('.')
-    repo.git.commit( m="Update: created @ {}".format(version) )
+    repo.git.commit( m="Update created @ {}".format(version) )
     logger.info('Commited successfully')
 
-def tag(repo, version):
+def tag(repo, version, message=""):
     """
     Tag last commit in the repo given.
     """
-    repo.create_tag(version)
+    repo.create_tag(version, message=message)
     logger.info('Tag created @ {}'.format(version))
 
 def push(repo, version):
@@ -32,9 +32,9 @@ def push(repo, version):
     """
     origin = repo.remote(name='origin')
     origin.push()
-    logger.info('Changes pushed at {}/\'master\''.format(origin))
+    logger.info('Changes pushed at {}/master'.format(origin))
     origin.push(version)
-    logger.info('Tag {} pushed at {}/\'master\''.format(version, origin))
+    logger.info('Tag {} pushed at {}/master'.format(version, origin))
 
 def makezip(version):
     """
@@ -93,7 +93,8 @@ def confirm():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Automatize the steps for creating a new version of the addon')
     parser.add_argument('version', help='Version to create as 1.3.0')
-    parser.add_argument('--push', help="Push changes to origin", action="store_true")
+    parser.add_argument('--message', help='Tag message', default='')
+    parser.add_argument('--push', help='Push changes to origin', action='store_true')
 
     args = parser.parse_args()
 
@@ -113,7 +114,7 @@ if __name__ == '__main__':
     makezip(vversion)
     # Commit changes and public tag
     commit(repo, vversion)
-    tag(repo, vversion)
+    tag(repo, vversion, args.message)
     # Push changes to origin/master
     if (args.push):
         push(repo, vversion)
