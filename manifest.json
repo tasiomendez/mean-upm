@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Calculadora Nota Media UPM",
-  "version": "1.2.4",
+  "version": "1.2.5",
 
   "description": "Calcula la nota media y realiza estadísticas sobre el expediente en la página oficial de la Universidad Politécnica de Madrid",
 
