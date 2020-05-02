@@ -6,6 +6,12 @@
 
   "description": "Calcula la nota media y realiza estadísticas sobre el expediente en la página oficial de la Universidad Politécnica de Madrid",
 
+  "browser_specific_settings": {
+    "gecko": {
+      "update_url": "https://raw.githubusercontent.com/tasiomendez/mean-upm/master/updates.json"
+    }
+  },
+
   "permissions": [
     "activeTab"
   ],
