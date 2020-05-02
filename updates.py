@@ -45,7 +45,7 @@ def makezip(version):
     object = ZipFile(zipname, 'w')
     # Folders and files to include
     folders = ['html', 'icons', 'scripts', 'styles']
-    files = ['LICENSE', 'manifest.json']
+    files = ['LICENSE', 'manifest.json', 'updates.json']
     for folder in folders:
         for root, subfolder, filenames in os.walk(folder):
             for filename in filenames:
