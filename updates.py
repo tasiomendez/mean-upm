@@ -12,22 +12,34 @@ logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(name)s - %(mes
 logger = logging.getLogger(__name__ if __name__ != '__main__' else 'main')
 
 def commit(repo, version):
+    """
+    Commit changes in the repo given.
+    """
     repo.git.add('.')
     repo.git.commit( m="Update: created @ {}".format(version) )
     logger.info('Commited successfully')
 
 def tag(repo, version):
+    """
+    Tag last commit in the repo given.
+    """
     repo.create_tag(version)
     logger.info('Tag created @ {}'.format(version))
 
 def push(repo, version):
+    """
+    Push changes and the corresponding tag to the origin remote.
+    """
     origin = repo.remote(name='origin')
     origin.push()
-    logger.info('Changes pushed at {}/\'master\''.format(repo))
+    logger.info('Changes pushed at {}/\'master\''.format(origin))
     origin.push(version)
-    logger.info('Tag {} pushed at {}/\'master\''.format(version, repo))
+    logger.info('Tag {} pushed at {}/\'master\''.format(version, origin))
 
 def makezip(version):
+    """
+    Make a zip with the necessary files and folder.
+    """
     logger.info('Making zip file')
     zipname = 'releases/upm-mean_{}.zip'.format(version)
     object = ZipFile(zipname, 'w')
@@ -45,6 +57,9 @@ def makezip(version):
     logger.info('Zip file created @ {}'.format(zipname))
 
 def manifest(version):
+    """
+    Update manifest.json version key.
+    """
     with open('manifest.json', 'r+') as f:
         logger.info('Updating manifest.json to v{}'.format(version))
         manifest = json.load(f)
@@ -53,6 +68,9 @@ def manifest(version):
         json.dump(manifest, f, indent=2)
 
 def updatesURL(version):
+    """
+    Update the updates.json with the corresponding URL.
+    """
     with open('updates.json', 'r+') as f:
         logger.info('Updating updates.json to load v{}'.format(version))
         updates = json.load(f)
@@ -75,13 +93,27 @@ def confirm():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Automatize the steps for creating a new version of the addon')
     parser.add_argument('version', help='Version to create as 1.3.0')
+    parser.add_argument('--push', help="Push changes to origing", action="store_true")
 
     args = parser.parse_args()
 
+    # Get only the number of the version
     version = re.search(r'\s*([\d.]+)', args.version).group(1)
+    vversion = "v{}".format(version)
     logger.info('Version to upgrade @ v{}'.format(version))
     if (not confirm()):
         sys.exit(0)
 
-    print('hola')
     repo = git.Repo( os.getcwd() )
+    # Updates updates.json
+    updatesURL(version)
+    # Updates manifest.json
+    manifest(version)
+    # Make zip
+    makezip(vversion)
+    # Commit changes and public tag
+    commit(repo, vversion)
+    tag(repo, vversion)
+    # Push changes to origin/master
+    if (args.push):
+        push(repo, vversion)
