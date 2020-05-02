@@ -1,27 +1,21 @@
 {
-
   "manifest_version": 2,
   "name": "Calculadora Nota Media UPM",
-  "version": "1.2.5",
-
-  "description": "Calcula la nota media y realiza estadísticas sobre el expediente en la página oficial de la Universidad Politécnica de Madrid",
-
+  "version": "1.2.6",
+  "description": "Calcula la nota media y realiza estad\u00edsticas sobre el expediente en la p\u00e1gina oficial de la Universidad Polit\u00e9cnica de Madrid",
   "browser_specific_settings": {
     "gecko": {
       "update_url": "https://raw.githubusercontent.com/tasiomendez/mean-upm/master/updates.json"
     }
   },
-
   "permissions": [
     "activeTab"
   ],
-
   "web_accessible_resources": [
     "html/template.*",
     "icons/*.svg",
     "scripts/*.js"
   ],
-
   "browser_action": {
     "browser_style": true,
     "default_popup": "html/popup.html",
@@ -32,12 +26,10 @@
       "128": "icons/icon@black_128.png"
     }
   },
-
   "icons": {
     "16": "icons/icon@black_16.png",
     "32": "icons/icon@black_32.png",
     "48": "icons/icon@black_48.png",
     "128": "icons/icon@black_128.png"
   }
-
 }
