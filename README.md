@@ -1,8 +1,8 @@
 # Browser addon
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/tasiomendez/mean-upm?label=latest%20version)](https://github.com/tasiomendez/mean-upm/releases)
-[![GitHub Release Date](https://img.shields.io/github/release-date/tasiomendez/mean-upm)](https://github.com/tasiomendez/mean-upm/releases)
-[![GitHub](https://img.shields.io/github/license/tasiomendez/mean-upm)](https://github.com/tasiomendez/mean-upm)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/tasiomendez/mean-upm?label=latest%20version)](https://github.com/tasiomendez/mean-upm/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/tasiomendez/mean-upm)](https://github.com/tasiomendez/mean-upm/releases/latest)
+[![GitHub](https://img.shields.io/github/license/tasiomendez/mean-upm)](https://github.com/tasiomendez/mean-upm/blob/master/LICENSE)
 
 Esta extensión permite calcular de una forma sencilla y rápida la nota media
 a partir de la información mostrada en el Expediente en la página de Politécnica
