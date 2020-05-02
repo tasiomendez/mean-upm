@@ -4,15 +4,15 @@
       "updates": [
         {
           "version": "1.2.1",
-          "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v1.2.1/mean-upm-firefox-fx.xpi"
+          "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v1.2.1/mean-upm-firefox_v1.2.1-fx.xpi"
         },
         {
           "version": "1.2.2",
-          "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v1.2.2/mean-upm-firefox-fx.xpi"
+          "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v1.2.2/mean-upm-firefox_v1.2.2-fx.xpi"
         },
         {
           "version": "1.2.4",
-          "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v1.2.4/mean-upm-firefox-fx.xpi"
+          "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v1.2.4/mean-upm-firefox_v1.2.3-fx.xpi"
         }
       ]
     }

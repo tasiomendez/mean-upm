@@ -76,7 +76,7 @@ def updatesURL(version):
         updates = json.load(f)
         current = {
                     "version": version,
-                    "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v{}/mean-upm-firefox-fx.xpi".format(version)
+                    "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v{}/mean-upm-firefox_v{}-fx.xpi".format(version, version)
                   }
         updates['addons']['{0f56a2f6-587d-4454-9e58-6b891b474372}']['updates'].append(current)
         f.seek(0)
