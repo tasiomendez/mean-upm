@@ -42,12 +42,12 @@ html, body {
   background-color: #e1e1e2;
 }
 
-.choice.disabled, #help {
+.choice.disabled {
   cursor: default !important;
   opacity: 0.5;
 }
 
-.choice.disabled:hover, #help:hover {
+.choice.disabled:hover {
   background-color: initial !important;
 }
 
