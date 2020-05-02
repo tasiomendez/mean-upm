@@ -93,7 +93,7 @@ def confirm():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Automatize the steps for creating a new version of the addon')
     parser.add_argument('version', help='Version to create as 1.3.0')
-    parser.add_argument('--push', help="Push changes to origing", action="store_true")
+    parser.add_argument('--push', help="Push changes to origin", action="store_true")
 
     args = parser.parse_args()
 
