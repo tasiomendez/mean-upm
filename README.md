@@ -21,9 +21,9 @@ utilizados con ningún otro fin.
 
 ## Instalación
 
-[![Firefox Installation](https://img.shields.io/badge/instalar-firefox-orange)](https://github.com/tasiomendez/mean-upm/releases/latest/download/mean-upm-firefox-fx.xpi)
+[![Firefox Installation](https://img.shields.io/badge/instalar-firefox-orange)](https://github.com/tasiomendez/mean-upm/releases/latest)
 [![Chrome Installation](https://img.shields.io/badge/instalar-chrome-blue)](https://chrome.google.com/webstore/detail/calculadora-nota-media-up/aaddcgfkamakcndombcojcaehjoanpkj)
 
-Para **Firefox** se debe [instalar](https://github.com/tasiomendez/mean-upm/releases/latest/download/mean-upm-firefox-fx.xpi) el archivo `.xpi` disponible desde la página de [releases](https://github.com/tasiomendez/mean-upm/releases/latest). Se encuentran disponibles diferentes versiones, pero siempre es **recomendable** instalar la última versión. 
+Para **Firefox** se debe instalar el archivo `.xpi` disponible desde la página de [releases](https://github.com/tasiomendez/mean-upm/releases/latest). Se encuentran disponibles diferentes versiones, pero siempre es **recomendable** instalar la última versión.
 
 Para **Chrome**, se puede encontrar la última versión disponible en [Chrome Web Store](https://chrome.google.com/webstore/detail/calculadora-nota-media-up/aaddcgfkamakcndombcojcaehjoanpkj).
