@@ -31,7 +31,7 @@ def push(repo, version):
     Push changes and the corresponding tag to the origin remote.
     """
     origin = repo.remote(name='origin')
-    origin.push()
+    origin.push("master")
     logger.info('Changes pushed at {}/master'.format(origin))
     origin.push(version)
     logger.info('Tag {} pushed at {}/master'.format(version, origin))
