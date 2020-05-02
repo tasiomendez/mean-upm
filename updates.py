@@ -92,9 +92,9 @@ def confirm():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Automatize the steps for creating a new version of the addon')
-    parser.add_argument('version', help='Version to create as 1.3.0')
-    parser.add_argument('--message', help='Tag message', default='')
-    parser.add_argument('--push', help='Push changes to origin', action='store_true')
+    parser.add_argument('version', help='version to create as 1.3.0')
+    parser.add_argument('--message', help='tag message', default='', required=True)
+    parser.add_argument('--push', help='push changes to origin', action='store_true')
 
     args = parser.parse_args()
 
@@ -102,6 +102,10 @@ if __name__ == '__main__':
     version = re.search(r'\s*([\d.]+)', args.version).group(1)
     vversion = "v{}".format(version)
     logger.info('Version to upgrade @ v{}'.format(version))
+    if (not confirm()):
+        sys.exit(0)
+
+    logger.info('Tagging commit with message: {}'.format(args.message))
     if (not confirm()):
         sys.exit(0)
 
