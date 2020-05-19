@@ -34,6 +34,8 @@ function listenForClicks (enabled) {
           return calculator(tab);
         else if (e.target.id === "statistics")
           return statistics(tab);
+        else if (e.target.id === "export")
+          return exportDataToCSV(tab);
         else throw new ValidationError("ButtonNotDefined");
       })
       .catch(onError);
@@ -62,6 +64,13 @@ function statistics(tab) {
     return _browser.sendMessage(tab, { function: "statistics" });
   })
   .catch(onError);
+}
+
+/**
+ * Export data to CSV and download file
+ */
+function exportDataToCSV(tab) {
+  return _browser.sendMessage(tab, { function: "export" });
 }
 
 /**

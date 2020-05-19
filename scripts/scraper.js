@@ -206,6 +206,91 @@
   }
 
   /**
+   * Structure the data of the whole page and transform
+   * it into a CSV string.
+   */
+  function getCSVData() {
+    let _data = getStructuredData();
+    _data.shift(); // Remove Career name
+    let data = _data.reduce((acc, item) => {
+      return acc.concat(item.data);
+    }, []);
+    let headers = CSVHeaders(data[0]);
+    return headers.concat(JSONtoCSV(data));
+  }
+
+  /**
+   * Get the headers of the data as they are shown in the page,
+   * so not the keys of the object are exported.
+   */
+  function CSVHeaders(data) {
+    let translator = (value) => Object.keys(translation).find(key => translation[key] === value);
+    let headers = Object.keys(data).map((item) => {
+      return normalize(translator(item));
+    });
+    return headers.join(';') + "\r\n";
+  }
+
+  /**
+   * Convert a JavaScript array into a CSV. Each row of the array is
+   * a line in the CSV and the values are separated by ';'.
+   */
+  function JSONtoCSV(data) {
+    let array = typeof data != "object" ? JSON.parse(data) : data;
+    let csv = "";
+
+    for (let i = 0; i < array.length; i ++) {
+      let line = "";
+      for (let index in array[i])
+        line += array[i][index].toString().replace(/ *\([^)]*\) */g, "") + ";";
+      csv += line + "\r\n"
+    }
+    return normalize(csv);
+  }
+
+  /**
+   * Normalize a String removing weird characters.
+   */
+  function normalize(str) {
+    var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+        to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuuNnCc",
+        mapping = {};
+
+    for (var i = 0, j = from.length; i < j; i++)
+      mapping[from.charAt(i)] = to.charAt(i);
+
+    var ret = [];
+    for (var i = 0, j = str.length; i < j; i++) {
+      var c = str.charAt(i);
+      if (mapping.hasOwnProperty(str.charAt(i)))
+        ret.push(mapping[ c ]);
+      else
+        ret.push(c);
+    }
+
+    return ret.join("");
+  }
+
+  /**
+   * Export the data shown in page to CSV and downloads a file.
+   * The CSV file downloaded contains all the columns and rows.
+   */
+  function exportDataToCSV() {
+    let csv = getCSVData();
+    let degree = getCareerName().match(/\(([^)]+)\)/)[1];
+
+    let date = new Date();
+    let month = ("0" + (date.getMonth() + 1)).slice(-2);
+    let year = date.getFullYear();
+
+    let link = document.createElement('a');
+    link.href = "data:attachment/text," + encodeURI(csv);
+    link.target = "_blank";
+    link.download = "grades_" + degree + "_" + month + year + ".csv";
+    link.click();
+  }
+
+  /**
    * Listen for messages from the background script.
    */
   _browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -214,15 +299,20 @@
       return acc || item.innerText.includes("Expediente");
     }, false);
 
+    let _data = getStructuredData();
+
     if (message.function === "check")
       sendResponse({ check: check })
 
-    else if (message.function === "mean" && getStructuredData())
+    else if (message.function === "mean" && _data)
       appender();
+
+    else if (message.function === "export" && _data)
+      exportDataToCSV();
 
     else if (message.function === "statistics")
       setTimeout(() => {
-        _browser.runtime.sendMessage({ data: getStructuredData() });
+        _browser.runtime.sendMessage({ data: _data });
       }, 1000)
   });
 
