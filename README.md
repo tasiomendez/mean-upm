@@ -12,7 +12,7 @@ Virtual de la Universidad Politécnica de Madrid.
 2. Dirigirse al menú 'Mis Datos' > 'Estudios' > 'Expediente'.
 3. Seleccionar el expediente que se quiere mostrar.
 4. Seleccionar como se desea ver el expediente (por curso, por año...)
-5. Calcular la media o mostrar estadísticas.
+5. Calcular la media, mostrar estadísticas o exportar datos.
 
 Los cálculos son realizados al momento, por lo que los datos utilizados para ello
 no son almacenados ni guardados. Los datos son procesados unica y exclusivamente
