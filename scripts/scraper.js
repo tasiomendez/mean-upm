@@ -285,12 +285,13 @@
     let month = ("0" + (date.getMonth() + 1)).slice(-2);
     let year = date.getFullYear();
 
-    // TODO use blob
     let link = document.createElement('a');
-    link.href = "data:attachment/text," + encodeURI(csv);
+    let blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    link.href = window.URL.createObjectURL(blob);
     link.target = "_blank";
     link.download = "grades_" + degree + "_" + month + year + ".csv";
     link.click();
+    window.URL.revokeObjectURL(link.href);
   }
 
   /**
