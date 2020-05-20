@@ -27,6 +27,10 @@
     "Tipo":        "type"
   };
 
+  // Prevent from run script multiple times.
+  if (document.querySelector('html body').classList.contains("scraped")) return;
+  else document.querySelector('html body').classList.add("scraped")
+
   /**
    * Extract data from the field given. It can be converted to a Number
    * in case it is needed.
@@ -182,7 +186,7 @@
   /**
    * Get the career name of the student;
    */
-  function getCareerName() {
+  function getCareerName () {
     if (document.querySelector("textarea"))
       return document.querySelector("textarea").value.split('-')[0].trim();
   }
@@ -192,7 +196,7 @@
    * The first position of the array is the name of the career, and the
    * remainder objects are each of the tables.
    */
-  function getStructuredData() {
+  function getStructuredData () {
     let data = [];
     data.push((getCareerName()) ? getCareerName() : "");
     document.querySelectorAll("table#tabla_expediente[data-role=table]").forEach((item) => {
@@ -209,7 +213,7 @@
    * Structure the data of the whole page and transform
    * it into a CSV string.
    */
-  function getCSVData() {
+  function getCSVData () {
     let _data = getStructuredData();
     _data.shift(); // Remove Career name
     let data = _data.reduce((acc, item) => {
@@ -223,7 +227,7 @@
    * Get the headers of the data as they are shown in the page,
    * so not the keys of the object are exported.
    */
-  function CSVHeaders(data) {
+  function CSVHeaders (data) {
     let translator = (value) => Object.keys(translation).find(key => translation[key] === value);
     let headers = Object.keys(data).map((item) => {
       return normalize(translator(item));
@@ -235,7 +239,7 @@
    * Convert a JavaScript array into a CSV. Each row of the array is
    * a line in the CSV and the values are separated by ';'.
    */
-  function JSONtoCSV(data) {
+  function JSONtoCSV (data) {
     let array = typeof data != "object" ? JSON.parse(data) : data;
     let csv = "";
 
@@ -251,21 +255,19 @@
   /**
    * Normalize a String removing weird characters.
    */
-  function normalize(str) {
-    var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+  function normalize (str) {
+    let from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
         to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuuNnCc",
         mapping = {};
 
-    for (var i = 0, j = from.length; i < j; i++)
+    for (let i = 0, j = from.length; i < j; i++)
       mapping[from.charAt(i)] = to.charAt(i);
 
-    var ret = [];
-    for (var i = 0, j = str.length; i < j; i++) {
-      var c = str.charAt(i);
-      if (mapping.hasOwnProperty(str.charAt(i)))
-        ret.push(mapping[ c ]);
-      else
-        ret.push(c);
+    let ret = [];
+    for (let i = 0, j = str.length; i < j; i++) {
+      let c = str.charAt(i);
+      if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[ c ]);
+      else ret.push(c);
     }
 
     return ret.join("");
@@ -275,7 +277,7 @@
    * Export the data shown in page to CSV and downloads a file.
    * The CSV file downloaded contains all the columns and rows.
    */
-  function exportDataToCSV() {
+  function exportDataToCSV () {
     let csv = getCSVData();
     let degree = getCareerName().match(/\(([^)]+)\)/)[1];
 
@@ -283,6 +285,7 @@
     let month = ("0" + (date.getMonth() + 1)).slice(-2);
     let year = date.getFullYear();
 
+    // TODO use blob
     let link = document.createElement('a');
     link.href = "data:attachment/text," + encodeURI(csv);
     link.target = "_blank";

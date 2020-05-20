@@ -74,7 +74,7 @@ function exportDataToCSV(tab) {
 }
 
 /**
- * Check if the user is in the right location.
+ * Check if the user is in the right location within the url.
  */
 function checkLocation () {
   return _browser.getCurrentTab()
@@ -92,6 +92,7 @@ function checkLocation () {
         "la media y las estadísticas. Por último seleccione como desea ver " +
         "el expediente";
       document.querySelector(".error").style.display = "block";
+      throw error; // Send error to next catch
     });
 }
 
