@@ -11,12 +11,15 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 .wrapper {
   flex: 1;
   display: flex;
   flex-direction: row;
+  height: min-content;
+  overflow: hidden;
 }
 
 .wrapper aside {
@@ -70,6 +73,8 @@ section.content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .footer {
@@ -185,4 +190,29 @@ svg text.bar {
   font-size: 0.8rem;
   color: white;
   fill: white;
+}
+
+.help h3 {
+  font-weight: 700;
+  border-bottom: 1px solid #343a40;
+  color: #343a40;
+  padding: 2px 0;
+  margin-top: 1.8rem;
+}
+
+.help p {
+  text-align: justify;
+}
+
+.help .p-img {
+  width: 100%;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.thead-light td {
+  color: #343a40;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+  font-weight: 700;
 }

@@ -44,6 +44,13 @@
                     <span class="media-body">Title</span>
                 </div>
             </li> -->
+
+            <li class="nav-item">
+                <div class="nav-link" id="help-tab" data-toggle="tab" href="#help" role="tab" aria-controls="help" aria-selected="true">
+                    <img src="/icons/help@black.svg" alt="icon" />
+                    <span class="media-body">Ayuda</span>
+                </div>
+            </li>
         </ul>
     </aside>
 
@@ -56,18 +63,162 @@
 
               </div>
             </div>
+            <!-- Menu de ayuda -->
+            <div class="tab-pane fade show mt-5 help" id="help" role="tabpanel" aria-labelledby="help-tab">
+              <div class="col-sm-10 offset-sm-1 module-wrapper hidden">
+                <h3>Nota media aritmética</h3>
+                <p> Cuando tenemos que resumir un conjunto de datos numéricos es muy frecuente utilizar la media aritmética.
+                  La media aritmética o promedio destaca por representar el reparto equitativo, el equilibrio, la equidad.
+                  Es el valor que tendrían los datos, si todos ellos fueran iguales. O, también, el valor que correspondería
+                  a cada uno de los datos de la distribución si su suma total se repartiera por igual.</p>
+                <h3>Nota media ponderada</h3>
+                <p>La media ponderada es una medida de tendencia central, que es apropiada cuando en un conjunto de datos cada
+                  uno de ellos tiene una importancia relativa (o peso) respecto de los demás datos. Se diferencia de la media
+                  aritmética en que no le da la misma importancia a todos los valores.</p>
+                <div class="p-img">
+                  <img src="/icons/mean.png" alt="mean" width="60%" />
+                </div>
+                <p>En este caso, se calcula la nota media ponderando las asignaturas en función del número de creditos de cada una,
+                  se multiplica cada nota por su ponderación (creditos) para luego sumarlos, obteniendo así una suma ponderada;
+                  después se divide esta entre la suma de los creditos superados, dando como resultado la nota media ponderada.</p>
+                <p>Este procedimiento es el <strong>usado realmente</strong> para calcular la nota media. Siendo la media aritmética
+                  presentada sólo a título informativo.</p>
+                <h3>Grade Point Average (GPA)</h3>
+                <p>El GPA es un término utilizado para asignar un valor numérico a las calificaciones acumuladas
+                  por un estudiante en el <strong>sistema estadounidense</strong>. Este valor puede ser anual o agruparse por períodos académicos, como
+                  pueden ser, Educación Primaria, Secundaria o Universitaria. Este valor normalmente se calcula en una escala de 0 a
+                  4.00 puntos. Sin embargo, en algunos casos puede ser hasta de 5.00.</p>
+                <h4>¿Cómo se calcula?</h4>
+                <p>En primer lugar, se realiza una conversión de las notas en el sistema español en una escala 0-10 a las notas del sistema estadounidense
+                  utilizando la siguiente tabla de conversión.</p>
+                <table class="table table-sm">
+                  <thead class="thead-light">
+                    <tr>
+                      <td>Escala</td>
+                      <td>Descripción</td>
+                      <td class="text-center">Nota US</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>10</td>
+                      <td>Matricula de Honor</td>
+                      <td class="text-center">A+</td>
+                    </tr>
+                    <tr>
+                      <td>9 - 9.99</td>
+                      <td>Sobresaliente</td>
+                      <td class="text-center">A</td>
+                    </tr>
+                    <tr>
+                      <td>7 - 8.99</td>
+                      <td>Notable</td>
+                      <td class="text-center">B</td>
+                    </tr>
+                    <tr>
+                      <td>5 - 6.99</td>
+                      <td>Aprobado</td>
+                      <td class="text-center">C</td>
+                    </tr>
+                    <tr>
+                      <td>0 - 4.99</td>
+                      <td>Suspenso</td>
+                      <td class="text-center">F</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>Después de realizar la conversión se traducen las notas en el sistema estadounidense a los
+                  puntos correspondientes para calcular posteriormente el GPA.</p>
+                <table class="table table-sm">
+                  <thead class="thead-light">
+                    <tr>
+                      <td class="text-center">Nota US</td>
+                      <td class="text-center">Puntuación</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">Nota US</td>
+                      <td class="text-center">Puntuación</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">Nota US</td>
+                      <td class="text-center">Puntuación</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">Nota US</td>
+                      <td class="text-center">Puntuación</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">Nota US</td>
+                      <td class="text-center">Puntuación</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">A+</td>
+                      <td class="text-center">4.0</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">B+</td>
+                      <td class="text-center">3.3</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">C+</td>
+                      <td class="text-center">2.3</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">D+</td>
+                      <td class="text-center">1.3</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">F</td>
+                      <td class="text-center">0.0</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">A</td>
+                      <td class="text-center">4.0</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">B</td>
+                      <td class="text-center">3.0</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">C</td>
+                      <td class="text-center">2.0</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">D</td>
+                      <td class="text-center">1.0</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">-</td>
+                      <td class="text-center">-</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">A-</td>
+                      <td class="text-center">3.7</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">B-</td>
+                      <td class="text-center">2.7</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">C-</td>
+                      <td class="text-center">1.7</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">D-</td>
+                      <td class="text-center">0.7</td>
+                      <td class="text-center"></td>
+                      <td class="text-center">-</td>
+                      <td class="text-center">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>Por último, se realiza una media ponderada de los puntos GPA en función de los
+                  creditos de cada asignatura, es decir, se suman todos los puntos GPA multiplicados
+                  por el número de creditos correspondiente para después dividir la suma ponderada
+                  entre el número total de creditos superados, obteniendo así el <strong>Cumulative GPA</strong></p>
+                <p><small>Más información @ <a href="https://www.scholaro.com/gpa-calculator/">Scholaro GPA Calculator</a></small></p>
+              </div>
+            </div>
+            <!-- //Menu de ayuda -->
           </div>
         </div>
       </div>
-
-      <footer class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <span class="copyright">&copy; 2020 Tasio Mendez - Calculadora Nota Media UPM</span>
-        </div>
-      </footer>
-
     </section>
+
   </div>
+
+  <footer class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="copyright">&copy; 2020 Tasio Mendez - Calculadora Nota Media UPM</span>
+    </div>
+  </footer>
 
   <script src="/scripts/resources/jquery-3.3.1.slim.min.js"></script>
   <script src="/scripts/resources/bootstrap.min.js"></script>
