@@ -197,14 +197,14 @@
    */
   function setSidebarMenu (data, career) {
     let menu = document.querySelector("ul.pmd-sidebar-nav");
-    while (menu.childNodes.length > 2)
-        menu.removeChild( menu.lastChild );
+    // while (menu.childNodes.length > 2)
+    //     menu.removeChild( menu.lastChild );
 
     for (let i = 0; i < data.length; i++) {
       if (!data[i].title) continue;
 
       let $li = buildNewMenuItem(data[i].title, i);
-      menu.appendChild($li);
+      menu.lastElementChild.before($li);
 
       getTemplate('/html/template.year.html')
           .then((template) => {
