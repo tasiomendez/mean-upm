@@ -13,18 +13,30 @@
   // Get the browser object
   const _browser = (typeof browser !== 'undefined') ? browser : chrome;
 
+  function getGPAPoints (grade) {
+    if (grade >= 10)
+      return 4.0;
+    else if (grade >= 9)
+      return 4.0;
+    else if (grade >= 7)
+      return 3.0;
+    else if (grade >= 5)
+      return 2.0;
+    else return 0.0;
+  }
+
   /**
    * Extract from the data the weighted mean.
    * sum(grade * ects) / sum(ects)
    */
-  function getWeightedAverage (data) {
+  function getWeightedAverage (data, toFixed) {
     let _data = data.reduce((acc, item) => {
       if (!Number(item.grade)) return acc;
       acc.ects += item.ects;
       acc.acc += item.ects * item.grade;
       return acc;
     }, { ects: 0, acc: 0 });
-    return (_data.acc / _data.ects).toFixed(4);
+    return (_data.acc / _data.ects).toFixed(toFixed || 4);
   }
 
   /**
@@ -74,6 +86,14 @@
    */
   function fillAverageTableRow (table, data, title, className) {
 
+    let gpa = data.map((item) => {
+      return {
+        ...item,
+        ects: item.ects,
+        grade: getGPAPoints(item.grade)
+      }
+    });
+
     let $tr = document.createElement("tr");
     if (className)
       $tr.className = className;
@@ -86,6 +106,9 @@
     let $mp = document.createElement("td");
     $mp.className = "center";
     $mp.innerText = getWeightedAverage(data);
+    let $gpa = document.createElement("td");
+    $gpa.className = "center";
+    $gpa.innerText = getWeightedAverage(gpa, 2);
     let $cs = document.createElement("td");
     $cs.className = "center";
     $cs.innerText = getPassedCredits(data);
@@ -93,6 +116,7 @@
     $tr.appendChild($th);
     $tr.appendChild($ma);
     $tr.appendChild($mp);
+    $tr.appendChild($gpa);
     $tr.appendChild($cs);
 
     table.querySelector("tbody").appendChild($tr);
