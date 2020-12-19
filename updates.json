@@ -25,6 +25,10 @@
         {
           "version": "1.3.2",
           "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v1.3.2/mean-upm-firefox_v1.3.2-fx.xpi"
+        },
+        {
+          "version": "1.3.3",
+          "update_link": "https://github.com/tasiomendez/mean-upm/releases/download/v1.3.3/mean-upm-firefox_v1.3.3-fx.xpi"
         }
       ]
     }
