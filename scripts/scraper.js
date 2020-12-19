@@ -35,10 +35,18 @@
    * Extract data from the field given. It can be converted to a Number
    * in case it is needed.
    */
-  function getDataFromField (str, toInt) {
-    let number = Number(str.replace(",",".").match(/[\d[\.|\,]+/));
-    if (number && !toInt) return number;
-    else return str;
+  function getDataFromField (str, column) {
+    switch (column) {
+      case "ects":
+      case "course":
+        return Number(str.replace(",","."));
+      case "grade":
+        let number = Number(str.replace(/^\D+|\D+$/g, "").replace(",","."));
+        if (number) return number;
+        else return str;
+      default:
+        return str;
+    }
   }
 
   /**
@@ -47,7 +55,7 @@
   function getDataFromRow (row, cols) {
     let data = {};
     for (let i = 0; i < cols.length; i++)
-      data[cols[i]] = getDataFromField(row.children[i].innerText, cols[i] === "subject");
+      data[cols[i]] = getDataFromField(row.children[i].innerText, cols[i]);
     return data;
   }
 
